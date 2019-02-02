@@ -1,0 +1,333 @@
+/*@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../fonts/BebasNeue-webfont.eot');
+    src: url('../fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/BebasNeue-webfont.woff') format('woff'),
+         url('../fonts/BebasNeue-webfont.ttf') format('truetype'),
+         url('../fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+*/
+html,
+body {
+    overflow: hidden !important;
+    font-family: 'Source Sans Pro', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    /* background: #333 url('/static/img/bg.jpg') repeat; */
+    /* position: relative; */
+    background: #000;
+    min-width: 780px;
+}
+
+#spinner {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #222222;
+}
+#spinner object{
+    margin: 0 auto;
+    overflow: hidden;
+    width: 600px;
+    height: 69px;
+    position: absolute;
+    top: 50%;
+    z-index: 2000;
+    left: 10%;
+    background: #211D21;
+}
+
+#spinner .fa {
+    font-size: 100px;
+    position: absolute;
+    left: 50%;
+    top: 20%
+}
+
+.container-panel {
+    /* border-radius: 5px; */
+    height: 100%;
+    /* border: solid 1px #ccc; */
+    margin: 0 auto;
+    padding: 10px;
+    background: url('/static/img/climate.png') no-repeat;
+    width: 100%;
+    background-position: -1px -1px;
+    background-size: cover;
+    /* position: relative; */
+    padding-top: 47px;
+    min-width: 780px;
+}
+
+.panel-body canvas {
+    margin-left: -15px;
+}
+
+.right {
+    float: right
+}
+
+.header {
+    font-weight: 600;
+    font-size: 24px;
+    color: #FFF;
+    margin-bottom: 5px;
+    background: #34495D;
+    width: 100%;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    padding: 1px 5px;
+}
+
+.header-time {
+    float: right;
+}
+
+.fan-speed {
+    width: 359px;
+    border: solid 1px #4B4242;
+    padding: 0px;
+    position: absolute;
+    float: left;
+    border-radius: 5px;
+    transform: rotate(-90deg);
+    top:160px;
+    left:-90px;
+}
+
+
+.fan-active {
+    width: 10px;
+    background: yellow;
+    position: absolute;
+    border-radius: 3px;
+}
+
+.fan-bar-one {
+    top: 53px;
+    height: 14px;
+    left: 43px;
+    display: none;
+    background: red;
+    border-radius: 50px;
+    width: 14px;
+}
+
+.fan-bar-two {
+    height: 20px;
+    left: 105px;
+    top: 49px;
+    display: none;
+}
+
+.fan-bar-three {
+    top: 45px;
+    left: 135px;
+    height: 30px;
+    display: none;
+}
+
+.fan-bar-four {
+    top: 41px;
+    height: 40px;
+    left: 169px;
+    width: 11px;
+    display: none;
+}
+
+.fan-bar-five {
+    height: 50px;
+    left: 202px;
+    top: 37px;
+    display: none;
+}
+
+.fan-bar {
+    width: 140px;
+    position: absolute;
+    left: 70px;
+    display: none;
+}
+
+.fan-speed .fan-down {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.fan-speed .fan-up {
+    width: 130px;
+    height: 130px;
+    border-radius: 5px;
+}
+
+.climate-pane {
+    width: 755px;
+    margin-bottom: 5px;
+}
+
+.ac-panel {
+    width: 100%;
+    position: absolute;
+    left: 80px;
+    top: 200px;
+}
+
+.switches-panel {
+    clear: both;
+    position: absolute;
+    bottom: 0;
+    left: 9%;
+}
+
+.switches img, .dash-foot img {
+    height: 80px;
+    width: 80px;
+}
+
+.switches img:active, .switches button:active {
+    background-color: yellow;
+}
+
+.heating-panel {
+    width: 428px;
+    /* font-size: 60px; */
+    border-radius: 5px;
+    position: absolute;
+    border: solid 1px #4B4242;
+    /* transform: rotate(-90deg); */
+    top: 42px;
+    right: 24px;
+}
+.heating-panel .fa{
+    font-size: 101px;
+}
+.slider.slider-horizontal{
+    margin-top: -65px !important;
+}
+
+
+.prog {
+    margin-top: 32px;
+    /* width: 172px; */
+    float: left;
+    margin-left: 5px;
+    top: 0;
+}
+ .servoSlider{
+    float:left; 
+}
+.servoOff{
+        float: right;
+    margin-right: 5px;
+}
+
+.slider-handle{
+    width: 50px !important;
+    height: 50px !important;
+    margin-top: -18px !important;
+    border-radius: 15px;
+}
+.slider .tooltip{
+    display: none !important;
+}
+.servo-pos {
+    font-size: 21px;
+    margin-left: -37px;
+    position: absolute;
+    margin-top: 18px;
+}
+
+.servoUp {
+    margin-right: 10px;
+    float: right;
+}
+
+.servoDown {
+    float: left;
+    margin-left: 10px;
+}
+
+.servoReset {
+    margin-left: 65px;
+}
+
+.ac-ctrl img {
+    background: #A9B356;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    margin-right: 50px;
+}
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../fonts/BebasNeue-webfont.eot');
+    src: url('../fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/BebasNeue-webfont.woff') format('woff'),
+    url('../fonts/BebasNeue-webfont.ttf') format('truetype'),
+    url('../fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+#point {
+    position: relative;
+    -moz-animation: mymove 1s ease infinite;
+    -webkit-animation: mymove 1s ease infinite;
+}
+
+@-webkit-keyframes mymove {
+
+    50% {
+        opacity: 0;
+        text-shadow: none;
+    }
+    100% {
+        opacity: 1.0;
+        text-shadow: 0 0 20px #00c6ff;
+    }
+}
+
+@-moz-keyframes mymove {
+    50% {
+        opacity: 0;
+        text-shadow: none;
+    }
+    100% {
+        opacity: 1.0;
+        text-shadow: 0 0 20px #00c6ff;
+    }
+}
+#clock{
+    display: block;
+    /* float: left; */
+    margin-top: 18%;
+    margin-left: 15%;
+    position: absolute;
+}
+.ac{
+    margin-top: -152px;
+    margin-left: 33%;
+    position: absolute;
+}
+.in-air{
+    position: absolute;
+    left: 13%;
+    top: -152px;
+}
+.out-air{
+    position: absolute;
+    left: 23%;
+    top: -152px;
+    rotate(200)
+}

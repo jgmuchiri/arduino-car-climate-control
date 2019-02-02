@@ -1,0 +1,202 @@
+var driverGaugeInitial = 550;
+
+$.fn.gauge = function (opts) {
+    this.each(function () {
+        var $this = $(this),
+            data = $this.data();
+        if (data.gauge) {
+            data.gauge.stop();
+            delete data.gauge;
+        }
+        if (opts !== false) {
+            data.gauge = new Gauge(this).setOptions(opts);
+        }
+    });
+    return this;
+};
+
+var opts = {
+    lines: 12, // The number of lines to draw
+    angle: 0, // The length of each line
+    lineWidth: 0.08, // The line thickness
+    pointer: {
+        length: 0.85, // The radius of the inner circle
+        strokeWidth: 0.035, // The rotation offset
+        color: '#000000' // Fill color
+    },
+    limitMax: 'false',   // If true, the pointer will not go past the end of the gauge
+    colorStart: '#6FADCF',   // Colors
+    colorStop: '#8FC0DA',    // just experiment with them
+    strokeColor: '#E0E0E0',   // to see which ones work best for you
+    generateGradient: true
+};
+var target = document.getElementById('fanSpeed'); // your canvas element
+
+//driver gauge
+var dGauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+dGauge.maxValue = 3000; // set max gauge value
+dGauge.animationSpeed = 31; // set animation speed (32 is default value)
+dGauge.set(driverGaugeInitial); // set actual value
+percentColors = [[0.0, "#a9d70b"], [0.50, "#f9c802"], [1.0, "#ff0000"]];
+
+
+var $driverFan = $('#driverFan').hide();
+
+init();
+function init() {
+    $driverFan.show().arctext({radius: 40});
+
+    //DRIVER
+    $('.driver .p-up,.driver .p-down').attr('id', driverGaugeInitial);
+
+    $('.driver .p-up').on('click', function () {
+        var value = $(this).attr('id');
+
+        var newVal = 0;
+        if (value >= 0) {
+            newVal = parseInt(value) + 50;
+        }
+        if (newVal > 3000) {
+            newVal = 3000;
+        }
+        $(this).attr('id', newVal);
+        $('.driver .p-down').attr('id', newVal);
+
+        dGauge.set(newVal);
+        //
+    });
+    $('.driver .p-down').on('click', function () {
+        var value = $(this).attr('id');
+
+        var newVal = 0;
+        if (value > 0) {
+            newVal = parseInt(value) - 50;
+        }
+        if (newVal > 3000) {
+            newVal = 3000;
+        }
+        $(this).attr('id', newVal);
+        $('.driver .p-up').attr('id', newVal);
+
+        dGauge.set(newVal);
+    });
+    $('.driver .p-stop').click(function () {
+        driverGaugeInitial = 0;
+        $('.driver .p-up,.driver .p-down').attr('id', driverGaugeInitial);
+        dGauge.set(driverGaugeInitial);
+    });
+
+    //control servo up
+    var servoPos = $('.servo-pos').text(10);
+
+    function setColor(val){
+        var r = (parseInt(val));
+        var g = (255-parseInt(val));
+        var b = (255-parseInt(val)+30);
+       return "rgb("+r+","+g+","+b+")";
+    }
+
+    //increase airflow
+    $('.servoUp').mousedown(function(){
+        var svUp = $(this).attr('id');
+        var nSvUp = 10;
+        if(svUp>=10){
+            nSvUp = parseInt(svUp)+2;
+        }
+        if(nSvUp>90){//prevent from going over 90 deg
+            nSvUp = 90;
+        }
+
+        $(this).attr('id', nSvUp);
+        $('.servoDown').attr('id', nSvUp);
+
+        servoPos.css('color',setColor(svUp));
+
+        $.ajax({
+            url: '/controls',
+            data: {'value':svUp},
+            type: 'POST',
+            success: function(response) {
+             console.log(response);
+             servoPos.text(svUp);
+            },
+            error: function(error) {
+                //console.log(error);
+            }
+        });
+    });
+    //minimize airflow
+    $('.servoDown').click(function(){
+        var svUp = $(this).attr('id');
+        var nSvUp =10;
+        if(svUp>10){
+            nSvUp = parseInt(svUp)-2;
+        }
+        if(nSvUp>90){
+            nSvUp = 90;
+        }
+
+        $(this).attr('id', nSvUp);
+        $('.servoUp').attr('id', nSvUp);
+        servoPos.css('color',setColor(svUp));
+
+        $.ajax({
+            url: '/controls',
+            data: {'value':svUp},
+            type: 'POST',
+            success: function(response) {
+                servoPos.text(svUp);
+
+            },
+            error: function(error) {
+                //console.log(error);
+            }
+        });
+    });
+
+    //CLOSE VALVE
+    $('.servoReset').click(function(){
+
+        $('.servoUp').attr('id',10);
+        $('.servoDown').attr('id',10);
+        servoPos.text(10);
+        $.ajax({
+            url: '/controls',
+            data: {'value':1},
+            type: 'POST',
+            success: function(response) {
+
+            },
+            error: function(error) {
+                //console.log(error);
+            }
+        });
+    });
+
+    //SWITCHES
+    //190-194:vents 196:in-circulation 197: out-circulation
+    $('.switches').click(function(){
+        var switcher = $(this).attr('id');
+        alert(switcher);
+        //change the state to 'next is off'
+        if(switcher == 198){
+            $(this).attr('id',199);
+        }
+
+        //change the state to 'next is on'
+        if(switcher == 199){
+            $(this).attr('id',198);
+        }
+
+        $.ajax({
+            url: '/switches',
+            data: {'switcher':switcher},
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            }
+        });
+    });
+
+
+};

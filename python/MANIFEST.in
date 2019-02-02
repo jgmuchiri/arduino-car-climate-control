@@ -1,0 +1,2 @@
+recursive-include cardash/templates *
+recursive-include cardash/static *

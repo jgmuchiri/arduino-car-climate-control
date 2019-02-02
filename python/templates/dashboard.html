@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div class="container-panel">
+        <div class="header">
+            <span class="header-title">Climate</span>
+
+            <div id="Date"></div>
+            <div class="header-time">
+                <span id="hours"> </span>
+                <span id="point">:</span>
+                <span id="min"> </span>
+                <span id="point">:</span>
+                <span id="sec"> </span>
+            </div>
+        </div>
+        <div class="fan-speed">
+            <a href="#" id="0" class="p-down"><img src="static/img/fan1.png" class="fan-down"/></i></a>
+            <div class="fan-active fan-bar-one"></div>
+            <div class="fan-active fan-bar-two"></div>
+            <div class="fan-active fan-bar-three"></div>
+            <div class="fan-active fan-bar-four"></div>
+            <div class="fan-active fan-bar-five"></div>
+            <img src="static/img/bar.png" class="fan-bar"/>
+            <a href="#" id="0" class="p-up right"><img src="static/img/fan2.png" class="fan-up"/></i></a>
+        </div>
+        <div class="heating-panel">
+
+            <a href="#" id="10" class="servoDown"><i class="fa fa-chevron-circle-down"></i></a>
+            <!--a href="#" class="servoReset"><i class="fa fa-square-o"><span class="servo-pos"></span></i></a-->
+            <div class="prog">
+                <div class="progress progress-cold">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0"
+                         aria-valuemax="100"
+                         style="width:70%">
+                        <!--span class="sr-only">70% Complete</span-->
+                    </div>
+
+                </div>
+                <div class="progress progress-hot">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
+                         aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                    </div>
+                </div>
+            </div>
+            <a href="#" id="10" class="servoUp" style="color:#D9534F"><i class="fa fa-chevron-circle-up"></i></a>
+
+        </div>
+
+        <div class="ac-ctrl ac-panel">
+            <a href="#" id="198" class="ac switches"><img src="static/img/ac.png"/></a>
+            <a href="#" id="196" class="in-air switches"><img src="static/img/in-air.png"></a>
+            <a href="#" id="197" class="out-air switches"><img src="static/img/out-air.png"></a>
+        </div>
+
+        <div class="switches-panel">
+            <button id="190" class="btn btn-warning switches"><img src="static/img/face.png"/></button>
+            <button id="191" class="btn btn-warning switches"><img src="static/img/face_feet.png"/></button>
+            <button id="192" class="btn btn-warning switches"><img src="static/img/feet.png"/></button>
+            <button id="193" class="btn btn-info switches"><img src="static/img/feet_windows.png"/></button>
+            <button id="194" class="btn btn-info switches"><img src="static/img/windows.png"></button>
+            &nbsp;
+            &nbsp;
+            <button id="999" class="btn btn-danger switches"><i class="glyphicon glyphicon-off"
+                                                                style="font-size:76px"></i></button>
+        </div>
+    </div>
+
+
+{% endblock %}

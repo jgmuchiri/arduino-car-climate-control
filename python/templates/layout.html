@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/arc.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <script type=text/javascript src="static/js/jquery.min.js"></script>
+
+    <script type=text/javascript src="static/js/global.js"></script>
+    <script type=text/javascript>
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+        $(window).load(function() {
+            $("#spinner").fadeOut("slow");
+        });
+    </script>
+</head>
+<body>
+<div id="spinner"><div class="fa fa-spinner spin"></div></div>
+{% block body %}{% endblock %}
+</body>
+</html>
