@@ -6,7 +6,9 @@ Rig the target car's climate control with this setup. Tested on a 95 Honda Civic
 This setup is basically intended to overide the vehicles circuit so that you can control it from a touch screen.
 Include Python and PHP scripts which you can customize to fit your needs.
 
-> ![img](screenshot.png)
+![img](IMG_0342.JPG)
+
+![img](screenshot.png)
 
 ## Features
 
